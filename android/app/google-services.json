@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "213958400915",
+    "project_id": "projecttokoituas",
+    "storage_bucket": "projecttokoituas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213958400915:android:32ab2135946f13d7a52666",
+        "android_client_info": {
+          "package_name": "com.example.tokoit_uas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213958400915-c3bh5j47rjje8oj8bcian6ignpitl04h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tokoit_uas",
+            "certificate_hash": "ae79e6fb5e32bf4e3488e2c8c6afb72564ed0b71"
+          }
+        },
+        {
+          "client_id": "213958400915-t541i4c2jab73mkj9b55fuieiqp1dohq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEipI5RsLLaR1rVTs0XCSOAWGSsGykrnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213958400915-t541i4c2jab73mkj9b55fuieiqp1dohq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
