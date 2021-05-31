@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tokoit_uas/auth/intro/welcome.dart';
 import 'package:tokoit_uas/mainNavDrawer.dart';
+import 'package:tokoit_uas/services/sign_in.dart';
 // import 'package:prak10minggu11/UI/login_page.dart';
 // import 'package:prak10minggu11/UI/sign_in.dart';
 
@@ -26,13 +28,13 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              // CircleAvatar(
-              //   backgroundImage: NetworkImage(
-              //     //imageUrl,
-              //   ),
-              //   radius: 60,
-              //   backgroundColor: Colors.transparent,
-              // ),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
               SizedBox(height: 40),
               Text(
                 'NAME',
@@ -41,13 +43,13 @@ class ProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black54),
               ),
-              // Text(
-              //  // name,
-              //   style: TextStyle(
-              //       fontSize: 25,
-              //       color: Colors.deepPurple,
-              //       fontWeight: FontWeight.bold),
-              // ),
+              Text(
+                name,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 20),
               Text(
                 'EMAIL',
@@ -56,22 +58,22 @@ class ProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black54),
               ),
-              // Text(
-              //  // email,
-              //   style: TextStyle(
-              //       fontSize: 25,
-              //       color: Colors.deepPurple,
-              //       fontWeight: FontWeight.bold),
-              // ),
+              Text(
+               email,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 40),
               // ignore: deprecated_member_use
               RaisedButton(
                 onPressed: () {
-                  // signOutGoogle();
-                  // Navigator.of(context).pushAndRemoveUntil(
-                  //     MaterialPageRoute(builder: (context) {
-                  //   return LoginPage();
-                  // }), ModalRoute.withName('/'));
+                  signOutGoogle();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) {
+                    return WelcomeScreen();
+                  }), ModalRoute.withName('/'));
                 },
                 color: Colors.deepPurple,
                 child: Padding(

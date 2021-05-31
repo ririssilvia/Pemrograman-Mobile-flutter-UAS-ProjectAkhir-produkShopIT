@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tokoit_uas/homeScreen/homeKategori.dart';
 import 'package:tokoit_uas/homeScreen/homeProduct.dart';
 import 'package:tokoit_uas/homeScreen/profile.dart';
+import 'package:tokoit_uas/services/sign_in.dart';
 
 import 'Auth/intro/welcome.dart';
 
@@ -15,8 +16,20 @@ class MainNavDrawer extends StatelessWidget {
     return Drawer(
         child: ListView(children: <Widget>[
       UserAccountsDrawerHeader(
-        accountName: Text("Riris"),
-        accountEmail: Text("Riris@gmail.com"),
+        accountName:  Text(
+                name,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+        accountEmail: Text(
+               email,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
         currentAccountPicture: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -27,10 +40,14 @@ class MainNavDrawer extends StatelessWidget {
                               builder: (context) => ProfileScreen(),
                             ));
             },
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"),
-            )),
+            child:CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
+            ),
       ),
       ListTile(
           leading: Icon(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tokoit_uas/Auth/intro/welcome.dart';
 import 'package:tokoit_uas/Auth/register/register.dart';
 import 'package:tokoit_uas/mainNavDrawer.dart';
 import 'package:tokoit_uas/homeScreen/profile.dart';
+import 'package:tokoit_uas/services/auth.dart';
+import 'package:tokoit_uas/services/sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var authHandler = new Auth();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   //tambahkan form untuk validasi form
@@ -95,14 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: "E-mail",
                             border: InputBorder.none,
                           ),
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter an Email Address';
-                          //   } else if (!value.contains('@')) {
-                          //     return 'Please enter a valid email address';
-                          //   }
-                          //   return null;
-                          // },
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter an Email Address';
+                            } else if (!value.contains('@')) {
+                              return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
                         ),
                       ),
 
@@ -149,14 +153,14 @@ class _LoginPageState extends State<LoginPage> {
                             isDense: true,
                             border: InputBorder.none,
                           ),
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter Password';
-                          //   } else if (value.length < 6) {
-                          //     return 'Password must be atleast 6 characters!';
-                          //   }
-                          //   return null;
-                          // },
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter Password';
+                            } else if (value.length < 6) {
+                              return 'Password must be atleast 6 characters!';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       Padding(
@@ -169,32 +173,25 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusDirectional.circular(30),
                         ),
-                        onPressed: () async {
-                          // if (_formKey.currentState.validate()) {
-                          //    authHandler
-                          //     .signInEmail(
-                          //            _emailController.text,
-                          //            _passController.text)
-                          //       .then((User user)  {
-                          //     if ( user != null) {
-                          //       Navigator.of(context).push(
-                          //         MaterialPageRoute(
-                          //           builder: (context) {
-                          //             return SuccessScreen();
-                          //           },
-                          //         ),
-                          //       );
-                          //     }
-                          //   });
-                          // }
-                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                             
-                              //builder: (context) => MainDrawer(),
-                              builder: (context) => ProfileScreen(),
-                            ));
-                        },
+                           onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                   authHandler
+                                    .signInEmail(
+                                           _emailController.text,
+                                           _passController.text)
+                                      .then((User user)  {
+                                    if ( user != null) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return ProfileScreen();
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  });
+                                }
+                              },
                         child: Text(
                           "Login",
                           style: TextStyle(color: Colors.white, fontSize: 20),
@@ -237,17 +234,17 @@ class _LoginPageState extends State<LoginPage> {
                                 vertical: 20, horizontal: 40),
                             color: Colors.black,
                             onPressed: () {
-                              // signInWithGoogle().then((result) {
-                              //   if (result != null) {
-                              //     Navigator.of(context).push(
-                              //       MaterialPageRoute(
-                              //         builder: (context) {
-                              //           return FirstScreen();
-                              //         },
-                              //       ),
-                              //     );
-                              //   }
-                              // });
+                              signInWithGoogle().then((result) {
+                                if (result != null) {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return ProfileScreen();
+                                      },
+                                    ),
+                                  );
+                                }
+                              });
                              
                             },
                             shape: RoundedRectangleBorder(
