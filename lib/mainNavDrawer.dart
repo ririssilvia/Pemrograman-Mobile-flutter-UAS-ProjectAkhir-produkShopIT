@@ -97,7 +97,7 @@ class MainNavDrawer extends StatelessWidget {
       ),
       Expanded(
         child: Container(
-          height: 200,
+          height: 300,
         ),
       ),
       Divider(
@@ -114,13 +114,13 @@ class MainNavDrawer extends StatelessWidget {
           size: 35,
         ),
         title: Text("Log Out"),
-        onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeScreen(),
-                          ));
-                    },
+           onTap: () {
+                  signOutGoogle();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) {
+                    return WelcomeScreen();
+                  }), ModalRoute.withName('/'));
+                },
       ),
       Divider(
         color: Colors.grey,

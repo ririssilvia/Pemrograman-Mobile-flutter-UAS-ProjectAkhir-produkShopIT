@@ -45,6 +45,13 @@ class MainNavRegisterState extends State<MainNavRegister> {
               ),
              
               SizedBox(height: 40),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png"
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
               SizedBox(height: 20),
               Text(
                 'EMAIL',
@@ -126,7 +133,7 @@ class MainNavRegisterState extends State<MainNavRegister> {
             },
             child:CircleAvatar(
                 backgroundImage: NetworkImage(
-                  "https://www.pngkit.com/png/full/281-2812821_user-account-management-logo-user-icon-png.png"
+                  "https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png"
                 ),
                 radius: 60,
                 backgroundColor: Colors.transparent,
@@ -181,7 +188,7 @@ class MainNavRegisterState extends State<MainNavRegister> {
       ),
       Expanded(
         child: Container(
-          height: 200,
+          height: 300,
         ),
       ),
       Divider(
@@ -198,13 +205,13 @@ class MainNavRegisterState extends State<MainNavRegister> {
           size: 35,
         ),
         title: Text("Log Out"),
-        onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeScreen(),
-                          ));
-                    },
+        onTap: () async {
+                    await authHandler.signOut();
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new WelcomeScreen()));
+        },
       ),
       Divider(
         color: Colors.grey,

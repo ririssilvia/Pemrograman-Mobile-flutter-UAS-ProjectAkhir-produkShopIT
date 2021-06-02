@@ -39,6 +39,13 @@ class _SuksesRegisterScreenState extends State<SuksesRegisterScreen> {
                     fontWeight: FontWeight.bold,
                     color: Colors.black54),
               ),
+                CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png"
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
              
               // SizedBox(height: 40),
               // Text(
@@ -73,13 +80,13 @@ class _SuksesRegisterScreenState extends State<SuksesRegisterScreen> {
               SizedBox(height: 40),
               // ignore: deprecated_member_use
               RaisedButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return WelcomeScreen();
-                  }), ModalRoute.withName('/'));
-                },
+              onPressed: () async {
+                    await authHandler.signOut();
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new WelcomeScreen()));
+                  },
                 color: Colors.deepPurple,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

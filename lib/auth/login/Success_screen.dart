@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tokoit_uas/auth/intro/welcome.dart';
+import 'package:tokoit_uas/homeScreen/homeKategori.dart';
+import 'package:tokoit_uas/homeScreen/homeProduct.dart';
 import 'package:tokoit_uas/services/auth.dart';
 
 
@@ -17,114 +19,211 @@ class _SuccessScreenState extends State<SuccessScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(20, 80, 20, 40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  "Congratulations",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.5,
-                      fontSize: 48),
-                ),
-                SizedBox(height: 16),
-                Expanded(
-                  child: Divider(
-                    color: Colors.black,
-                    thickness: 3,
-                  ),
-                ),
-                SizedBox(height: 60),
-              ],
-            ),
-            Text(
-              "You have logged in.",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w300,
-                  letterSpacing: 3,
-                  fontSize: 36),
-            ),
-            Container(
-              child: Image.asset(
-                'assets/images/uu.png',
-              ),
-            ),
-             Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Text(
-                'Nama',
+      appBar: AppBar(
+        title: Text('Welcome '),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.indigo[100], Colors.indigo[400]],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text(
+                'Hallo',
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black54),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              // child: Text(
-              //  // auth.currentUser.displayName,
-              //   style: TextStyle(
-              //       fontSize: 30,
-              //       fontWeight: FontWeight.bold,
-              //       color: Colors.white),
-              // ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Text(
-                'Email',
+             
+              SizedBox(height: 40),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png"
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
+              SizedBox(height: 20),
+              Text(
+                'EMAIL',
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black54),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(
+              Text(
                 auth.currentUser.email,
                 style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    fontSize: 25,
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold),
               ),
-            ),
-
-            SizedBox(height: 50),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              width: size.width * 0.8,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                // ignore: deprecated_member_use
-                child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  color: Colors.white,
-                  onPressed: () async {
+              SizedBox(height: 40),
+              // ignore: deprecated_member_use
+              RaisedButton(
+                onPressed: () async {
                     await authHandler.signOut();
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new WelcomeScreen()));
                   },
+                color: Colors.deepPurple,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Sign Out",
-                    style: TextStyle(color: Colors.black),
+                    'Sign Out',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
               ),
-            ),
-          ],
+              
+            ],
+          ),
         ),
       ),
+      drawer: _buildDrawer(),
+     // endDrawer: _buildDrawer(),
     );
   }
-}
+
+  Widget _buildDrawer() {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width/1.2,
+      child: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+             UserAccountsDrawerHeader(
+        accountName:  Text(
+                "Admin",
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+        accountEmail: Text(
+               auth.currentUser.email,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+        currentAccountPicture: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                             
+                              //builder: (context) => MainDrawer(),
+                              builder: (context) =>SuccessScreen(),
+                            ));
+            },
+            child:CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png"
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
+            ),   
+      ),
+           ListTile(
+          leading: Icon(
+            Icons.add_chart_rounded,
+            color: Colors.indigo[900],
+            size: 35,
+          ),
+          title: Text("Product"),
+          onTap: () {
+          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                             
+                              builder: (context) => ListViewProduct(),
+                            ));
+        }
+          ),
+          Divider(
+        color: Colors.grey,
+        height: 30,
+        thickness: 1,
+        indent: 26,
+        endIndent: 26,
+      ),
+       ListTile(
+        leading: Icon(
+          Icons.category,
+          color: Colors.indigo[900],
+          size: 35,
+        ),
+        title: Text("Kategori"),
+        onTap: () {
+          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                             
+                              builder: (context) => ListViewKategori(),
+                            ));
+        }
+      ),
+      Divider(
+        color: Colors.grey,
+        height: 30,
+        thickness: 1,
+        indent: 26,
+        endIndent: 26,
+      ),
+      Expanded(
+        child: Container(
+          height: 300,
+        ),
+      ),
+      Divider(
+        color: Colors.grey,
+        height: 30,
+        thickness: 1,
+        indent: 26,
+        endIndent: 26,
+      ),
+      ListTile(
+        leading: Icon(
+          Icons.exit_to_app,
+          color: Colors.indigo[900],
+          size: 35,
+        ),
+        title: Text("Log Out"),
+         onTap: () async {
+                    await authHandler.signOut();
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new WelcomeScreen()));
+                  },
+      ),
+      Divider(
+        color: Colors.grey,
+        height: 30,
+        thickness: 1,
+        indent: 26,
+        endIndent: 26,
+      ),
+          ]
+        )
+
+      )
+    );
+    
+  }
+  }
