@@ -22,8 +22,15 @@ class _ListViewProductState extends State<ListViewProduct> {
           title: Text('Products List'),
           //centerTitle: true,
           backgroundColor: Colors.indigo[900], 
-                   
+              leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
+                   
+        
         body: Center(
           child: ListView.builder(
              // itemCount: items.length,
@@ -117,7 +124,7 @@ class _ListViewProductState extends State<ListViewProduct> {
                           ));
                     },
         ),
-        drawer: MainNavDrawer(),
+        //drawer: MainNavDrawer(),
       );
     
   }

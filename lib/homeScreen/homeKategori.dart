@@ -21,8 +21,13 @@ class _ListViewKategoriState extends State<ListViewKategori > {
         appBar: AppBar(
           title: Text('Kategori List'),
           //centerTitle: true,
-          backgroundColor: Colors.indigo[900], 
-                   
+          backgroundColor: Colors.indigo[900],    
+            leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         body: Center(
           child: ListView.builder(
@@ -117,7 +122,7 @@ class _ListViewKategoriState extends State<ListViewKategori > {
                           ));
                     },
         ),
-        drawer: MainNavDrawer(),
+       // drawer: MainNavDrawer(),
       );
     
   }

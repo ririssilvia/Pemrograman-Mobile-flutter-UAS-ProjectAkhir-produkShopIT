@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tokoit_uas/Auth/intro/welcome.dart';
+import 'package:tokoit_uas/auth/register/suksesRegister.dart';
+import 'package:tokoit_uas/services/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -8,10 +11,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //TextEditingController _namaController = new TextEditingController();
+  TextEditingController _namaController = new TextEditingController();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   //tambahkan form untuk validasi form
   final _formKey = GlobalKey<FormState>();
+   var authHandler = new Auth();
 
   //untuk hidepassword icon
   bool _isHidePassword = true;
@@ -72,6 +77,41 @@ class _RegisterPageState extends State<RegisterPage> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
+                      Container(
+                        //margin: EdgeInsets.symmetric(vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        width: size.width * 0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.indigo[100],
+                          border: Border.all(
+                            color: Colors.indigo,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+
+                        child: TextFormField(
+                          controller: _namaController,
+                          keyboardType: TextInputType.name,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.person_add,
+                                color: Colors.indigo),
+                            hintText: "Nama",
+                            border: InputBorder.none,
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter an Name';
+                            } 
+                            return null;
+                          },
+                        ),
+                      ),
+                       Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
                       Container(
                         //margin: EdgeInsets.symmetric(vertical: 10),
                         padding:
@@ -170,25 +210,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusDirectional.circular(30),
                         ),
-                        onPressed: () async {
-                          // if (_formKey.currentState.validate()) {
-                          //    authHandler
-                          //     .signInEmail(
-                          //            _emailController.text,
-                          //            _passController.text)
-                          //       .then((User user)  {
-                          //     if ( user != null) {
-                          //       Navigator.of(context).push(
-                          //         MaterialPageRoute(
-                          //           builder: (context) {
-                          //             return SuccessScreen();
-                          //           },
-                          //         ),
-                          //       );
-                          //     }
-                          //   });
-                          // }
-                        },
+                         onPressed: () {
+                                authHandler
+                                    .createUserWithEmail(_emailController.text,
+                                        _passController.text)
+                                    .then((User user) {
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              new SuksesRegisterScreen()));
+                                }).catchError((e) => print(e));
+                              },
                         child: Text(
                           "Register",
                           style: TextStyle(color: Colors.white, fontSize: 20),

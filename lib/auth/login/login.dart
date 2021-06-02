@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tokoit_uas/Auth/intro/welcome.dart';
 import 'package:tokoit_uas/Auth/register/register.dart';
+import 'package:tokoit_uas/auth/login/Success_screen.dart';
+import 'package:tokoit_uas/mainDrawerlogin.dart';
 import 'package:tokoit_uas/mainNavDrawer.dart';
 import 'package:tokoit_uas/homeScreen/profile.dart';
 import 'package:tokoit_uas/services/auth.dart';
@@ -173,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusDirectional.circular(30),
                         ),
-                           onPressed: () async {
+                             onPressed: () async {
                                 if (_formKey.currentState.validate()) {
                                    authHandler
                                     .signInEmail(
@@ -184,7 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) {
-                                            return ProfileScreen();
+                                            //return SuccessScreen();
+                                            return MainNavRegister();
                                           },
                                         ),
                                       );
